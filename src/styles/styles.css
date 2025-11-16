@@ -1,0 +1,530 @@
+body {
+font-family: 'SVN-Helvetica Now', sans-serif;
+overflow-x: hidden;
+}
+
+.header {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 60px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 60px;
+background-color: #fff;
+border-bottom: 1px solid #eee;
+z-index: 1000;
+}
+
+.logo {
+padding-left: 50px;
+}
+
+.nav-menu {
+display: flex;
+gap: 60px;
+}
+
+.nav-menu a {
+text-decoration: none;
+color: #000;
+font-size: 16px;
+transition: color 0.3s ease;
+}
+
+
+.nav-icons {
+display: flex;
+gap: 30px;
+}
+
+.nav-icons img {
+cursor: pointer;
+transition: transform 0.3s ease;
+}
+
+.nav-icons img {
+transform: scale(1.1);
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+}
+.section {
+position: relative;
+width: 1920px;
+height: 1020px;
+
+overflow: hidden;
+}
+.section1 {
+position: relative;
+width: 1920px;
+height: 1168px; 
+overflow: hidden;
+}
+.section2 {
+position: relative;
+width: 1920px;
+height: 1080px; 
+overflow: hidden;
+}
+.section3 {
+margin-top:200px;
+position: relative;
+width: 1920px;
+height: 982px; 
+overflow: hidden;
+}
+
+.section > img.back {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+object-position: center;
+z-index: 1;
+}
+
+.section > img.model {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+object-position: center;
+z-index: 2; 
+}
+
+.section > img.text {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+object-position: center;
+z-index: 1;
+}
+
+#slide2 {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 1282px;
+height: auto;
+object-fit: contain;
+}
+
+#text-0 {
+position: absolute;
+top: 100px;
+left: 100px;
+width: 1314px;
+height: auto;
+object-fit: contain;
+}
+
+
+#content {
+position: absolute;
+margin-top:450px;
+margin-left: 100px;
+width: 30%;
+display: flex;
+gap: 30px;
+font-size: 16px;
+line-height: 1.6;
+}
+
+.discover-btn {
+position: absolute;
+left: 100px;
+top: 650px;
+width: 240px;
+height: 60px;
+background-image: url('image/Button1.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+border: none;
+cursor: pointer;
+transition: transform 0.3s ease;
+z-index: 5;
+}
+#btn1{
+    left:208px;
+    top:775px;
+}
+
+.discover-btn:hover {
+  transform: scale(0.95);
+}
+#image-0 {
+top: 450px;
+left:1100px;
+width: 570px;
+z-index: 10;
+}
+#image-1 {
+top: 80px;
+left: 320px;
+width: 517px;
+z-index: 10;
+}
+
+#image-2 {
+top: 600px;
+left: 750px;
+width: 548px;
+z-index: 10;
+}
+.image {
+  position: absolute;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.6s ease;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+#content3 {
+position: absolute;
+top: 250px;
+right: 350px;
+width: 480px;
+text-align: left;
+font-size: 16px;
+line-height: 1.5;
+}
+
+#HIGHLIGHT {
+position: absolute;
+margin-top: 290px;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 600px;
+height: auto;
+object-fit: contain;
+}
+#slide{
+    width:625px;
+    height:700px;
+}
+.action-button {
+    text-decoration: underline;
+    position: absolute;
+    left: 50%;
+    top: 1065px; 
+    transform: translate(-50%, -50px);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 11; 
+    background-color: transparent;
+    border: none;
+}
+.image-display-box {
+    width: 625px; 
+    height: 700px;
+    position: absolute; 
+    left: 50%;
+    top: 375px; 
+    transform: translateX(-50%); 
+    overflow: hidden; 
+    z-index: 10;
+}
+.cycle-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    transition: transform 0.6s ease-in-out; 
+}
+.cycle-image {
+    transform: translateX(100%);
+}
+.cycle-image.active {
+    transform: translateX(0);
+}
+.cycle-image.leaving {
+    transform: translateX(-100%);
+}
+
+#text2{
+    position:absolute;
+    width:406px;
+    height:408px;
+    top:527px;
+    left:1414px;
+}
+#text1{
+    position:absolute;
+    width:117px;
+    height:21px;
+    top:539px;
+    left:150px;
+}
+#number{
+    font-size: 16px;
+    position:absolute;
+    width:18px;
+    height:24px;
+    top:593px;
+    left:100px;
+}
+#text3{
+    margin:auto;
+    width:1609px;
+    height:834px;
+}
+.create-btn {
+position: absolute;
+left: 100px;
+top: 650px;
+width: 240px;
+height: 60px;
+background-image: url('image/Button2.svg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+border: none;
+cursor: pointer;
+transition: transform 0.3s ease;
+z-index: 5;
+}
+#btn2{
+    left:840px;
+    top:680px;
+}
+.create-btn:hover {
+  transform: scale(0.95);
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; }      
+  10% { opacity: 1; }   
+  40% { opacity: 1; }     
+  50% { opacity: 0; }   
+  90% { opacity: 0; }     
+  100% { opacity: 0; }  
+}
+#image-5 {
+  position: absolute;
+  top: 60px;
+  left: 150px;
+  width: 352px;
+  z-index: 10;
+  animation: fadeInOut 6s ease-in-out infinite;
+}
+#image-6 {
+  position: absolute;
+  top: 250px;
+  left: 1430px;
+  width: 283px;
+  z-index: 10;
+  animation: fadeInOut 6s ease-in-out infinite;
+}
+#image-7 {
+  position: absolute;
+  top: 96px;
+  left: 1440px;
+  width: 280px;
+  z-index: 10;
+  animation: fadeInOut 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+#image-8 {
+  position: absolute;
+  top: 270px;
+  left: 160px;
+  width: 351px;
+  z-index: 10;
+  animation: fadeInOut 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+.floating-input {
+  position: absolute;
+  top: 390px;
+  left: 540px;
+  width: 300px;
+  z-index: 5;
+}
+
+.floating-input input {
+  width: 100%;
+  height: 50px;
+  padding: 18px 12px 8px;
+  font-size: 16px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.floating-input span {
+  position: absolute;
+  left: 12px;
+  top: 18px;
+  font-size: 16px;
+  color: rgba(172, 172, 172, 0.4);
+  pointer-events: none;
+  transition: all 0.5s ease;
+}
+
+.floating-input input:focus + span,
+.floating-input input.filled + span {
+  top: -8px;
+  font-size: 12px;
+  color: black;
+}
+.submit-btn {
+  width: 240px;
+  height: 60px;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  border:none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: scale(0.95);
+}
+.email-label {
+  position: absolute;
+  font-size: 18px;
+  color: rgb(172, 172, 172, 0.5);
+  height: 50px;
+  line-height: 50px; 
+}
+.section4 {
+margin-top: 100px;
+margin-bottom:100px;
+position: relative;
+width: 1920px;
+height: 577px; 
+overflow: hidden;
+}
+#text3{
+    width:468px;
+    height:auto;
+    position: absolute;
+    left: 150px;
+}
+#text4{
+    width:468px;
+    height:auto;
+    position: absolute;
+    left: 100px;
+}
+.scroll-container {
+  margin-left: 100px;
+  padding-right: 150px;
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-top: 100px;
+  width: 1920px;
+  scroll-behavior: auto;
+  position: relative;
+  margin-left: 100px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: grab;
+  scrollbar-width: none;
+}
+.scroll-container.active {
+  cursor: grabbing;
+}
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.card {
+  flex: 0 0 auto;
+  width: 548px;
+  height: 289px;
+  background: #272727;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#join-our-circle{
+    position: relative;
+    margin:auto;
+    width:1501px;
+    height:293px;
+}
+.join-submit-btn {
+  position: absolute;
+  background: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+}
+.section5 {
+position: relative;
+width: 1920px;
+height: 437px; 
+overflow: hidden;
+}
+.footer-btn {
+  position: absolute;     
+  background: none;
+  border: none;
+  color: rgba(172, 172, 172, 0.8);
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-btn:hover {
+  color: white;
+}
+.footer-text {
+  position: absolute;
+  bottom: 160px;         
+  left: 1305px;
+  width: 479px;
+  height:63px;           
+  color: rgba(172, 172, 172, 0.8);
+  font-size: 12px;
+  line-height: 1.5;
+  opacity: 0.9;   
+}
+.privacy-btn {
+  top:252px;
+  right:519px;
+  position: absolute;     
+  background: none;
+  border: none;
+  color: rgba(172, 172, 172, 0.8);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: underline;
+}
+
+.privacy-btn:hover {
+  color: #fff;
+}
