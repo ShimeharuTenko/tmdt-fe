@@ -1,26 +1,21 @@
 // src/pages/products/ProductsHomePage.tsx
 import React, { useEffect, useState } from "react";
-import { Row, Col, Spin, Alert, Dropdown, type MenuProps, Button } from "antd";
+import { Row, Col, Spin, Alert, Dropdown, type MenuProps, Button, Input } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import type { Product } from "../../types/product";
 import { ProductCard } from "../../components/ProductCard";
 import { Header } from "../../layouts/AppHeader";
 import { Footer } from "../../layouts/AppFooter";
+import { Link } from "react-router-dom";
 
-const categories = [
-  "All",
-  "Bracelets",
-  "Necklaces",
-  "Earrings",
-  "Rings",
-  "Anklets",
-];
+const { Search } = Input;
 
 export const ProductsHomePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortType, setSortType] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -47,14 +42,38 @@ export const ProductsHomePage: React.FC = () => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = products.filter(
-    (p) => p.published && p.thumbnail
-  );
+  let filteredProducts = products
+    .filter((p) => p.published && p.thumbnail)
+    .filter((p) => {
+      if (!searchTerm.trim()) return true;
 
-  const filterMenu: MenuProps["items"] = [
-    { key: "all", label: "All" },
-    { key: "bestseller", label: "Best seller" },
-  ];
+      const query = searchTerm.toLowerCase();
+
+      return (
+        p.name.toLowerCase().includes(query) ||
+        p.sku.toLowerCase().includes(query) ||
+        p.slug.toLowerCase().includes(query) ||
+        (p.shortDescription || "").toLowerCase().includes(query)
+      );
+    });
+
+  if (sortType === "price-asc") {
+    filteredProducts = [...filteredProducts].sort(
+      (a, b) => Number(a.price) - Number(b.price)
+    );
+  }
+
+  if (sortType === "price-desc") {
+    filteredProducts = [...filteredProducts].sort(
+      (a, b) => Number(b.price) - Number(a.price)
+    );
+  }
+
+  if (sortType === "newest") {
+    filteredProducts = [...filteredProducts].sort(
+      (a, b) => a.name.localeCompare(b.name)
+    );
+  }
 
   const sortMenu: MenuProps["items"] = [
     { key: "newest", label: "Newest" },
@@ -70,45 +89,31 @@ export const ProductsHomePage: React.FC = () => {
 
       <main className="flex-1 flex justify-center mt-12">
         <div className="w-full max-w-6xl pt-10 pb-16 px-4 lg:px-0">
-          <div className="flex items-center justify-between mb-8 text-sm">
-            <div className="flex items-center gap-6">
-              {/* <Dropdown
-                menu={{ items: filterMenu }}
+
+          {/* Filter / Category / Sort bar */}
+          <div className="flex items-center justify-content mb-8 text-sm">
+            <div className="flex items-center gap-20 w-[100%]">
+              <Search
+                allowClear
+                placeholder="Search by name, SKU..."
+                className="w-64"
+                onChange={(e) => setSearchTerm(e.target.value)}
+                value={searchTerm}
+              />
+
+              <Dropdown
+              menu={{
+                items: sortMenu,
+                onClick: ({ key }) => setSortType(key) 
+              }}
                 trigger={["click"]}
-                placement="bottomLeft"
+                placement="bottomRight"
               >
                 <Button type="text" className="px-0">
-                  Filter <DownOutlined style={{ fontSize: 10 }} />
+                  Sort <DownOutlined style={{ fontSize: 10 }} />
                 </Button>
-              </Dropdown> */}
-
-              {/* <div className="flex items-center gap-4 text-xs uppercase tracking-[0.14em] text-gray-500">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={
-                      "pb-1 border-b border-transparent hover:text-black" +
-                      (activeCategory === cat
-                        ? " text-black border-black"
-                        : "")
-                    }
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div> */}
+              </Dropdown>
             </div>
-
-            {/* <Dropdown
-              menu={{ items: sortMenu }}
-              trigger={["click"]}
-              placement="bottomRight"
-            >
-              <Button type="text" className="px-0">
-                Sort <DownOutlined style={{ fontSize: 10 }} />
-              </Button>
-            </Dropdown> */}
           </div>
 
           {loading && (
@@ -124,34 +129,36 @@ export const ProductsHomePage: React.FC = () => {
           )}
 
           {!loading && !error && (
-            <Row gutter={[32, 56]} justify="center" className="mt-12">
-              {filteredProducts.map((p, index) => (
-                <Col key={p.id} xs={24} sm={12} md={12} lg={6}>
+          <Row gutter={[32, 56]} justify="center" className="mt-12">
+            {filteredProducts.map((p, index) => (
+              <Col key={p.id} xs={24} sm={12} md={12} lg={6}>
+                <Link
+                  to={`/products/${p.slug}`}
+                  className="block no-underline text-inherit"
+                >
                   <ProductCard
                     name={p.name}
                     price={p.price}
                     thumbnail={p.thumbnail || "/placeholder.png"}
-                    variantLabel={
-                      p.shortDescription ? "WHITE CITRINE" : undefined
-                    }
+                    variantLabel="WHITE CITRINE"
                     isBestSeller={index < 6}
                   />
-                </Col>
-              ))}
-            </Row>
+                </Link>
+              </Col>
+            ))}
+          </Row>
           )}
+            {!loading && !error && filteredProducts.length === 0 && (
+              <div className="text-center text-gray-500 mt-12">
+                No products available.
+              </div>
+            )}
+          </div>
+        </main>
 
-          {!loading && !error && filteredProducts.length === 0 && (
-            <div className="text-center text-gray-500 mt-12">
-              No products available.
-            </div>
-          )}
-        </div>
-      </main>
-
-      <footer className="w-full mt-auto">
-        <Footer />
-      </footer>
+        <footer className="w-full mt-auto">
+          <Footer />
+        </footer>
     </div>
   );
 };

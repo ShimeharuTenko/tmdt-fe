@@ -2,7 +2,7 @@
 import React from "react";
 
 import logoImg from "../assets/img/logo.svg";
-import searchImg from "../assets/img/Search.svg";
+// import searchImg from "../assets/img/Search.svg";
 import cartImg from "../assets/img/Cart.svg";
 import userImg from "../assets/img/User.svg";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
       </nav>
 
       <div className="nav-icons">
-        <img src={searchImg} alt="search" />
+        {/* <img src={searchImg} alt="search" /> */}
         <img src={cartImg} alt="cart" />
         <Link to="/register">
         <img

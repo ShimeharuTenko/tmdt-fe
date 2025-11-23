@@ -25,9 +25,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         shadow-[0_10px_24px_rgba(0,0,0,0.08)]
         border border-[#f1ede7]
         overflow-hidden
+        cursor-pointer
       "
     >
-      {/* PHẦN ẢNH FULL BOX */}
+
       <div className="relative w-full h-[260px] overflow-hidden">
         {isBestSeller && (
           <div
@@ -57,7 +58,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         />
       </div>
 
-      {/* PHẦN TEXT */}
       <div className="px-6 py-4 text-center">
         <div className="text-[16px] font-semibold tracking-wide mb-1">
           {name}
