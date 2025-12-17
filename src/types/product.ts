@@ -16,4 +16,5 @@ export interface Product {
   variants: any[] | null;
   tags: any[] | null;
   published: boolean;
+  stock?: number;  
 }

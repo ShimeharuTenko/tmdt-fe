@@ -21,20 +21,26 @@ export const LoginForm: React.FC = () => {
 
       const res = await fetch("/api/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(payload),
       });
 
-      const text = await res.text();
+      // ❗ parse JSON
+      const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(text || "Login failed");
+        throw new Error(data?.message || "Login failed");
       }
 
-      // chuyển trang
+      // ✅ STORE JWT TOKEN
+      localStorage.setItem("token", data.token);
+
+      // 👉 redirect
       setTimeout(() => {
         window.location.href = "/";
-      }, 800);
+      }, 500);
 
     } catch (err: any) {
       console.error(err);
@@ -76,10 +82,7 @@ export const LoginForm: React.FC = () => {
         name="password"
         rules={[
           { required: true, message: "Please input your password!" },
-          {
-            min: 6,
-            message: "Password must be at least 6 characters.",
-          },
+          { min: 6, message: "Password must be at least 6 characters." },
         ]}
       >
         <Input.Password allowClear placeholder="Enter your password" />

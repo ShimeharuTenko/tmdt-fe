@@ -5,12 +5,14 @@ import { Spin, Alert } from "antd";
 import type { Product } from "../../types/product";
 import { Header } from "../../layouts/AppHeader";
 import { Footer } from "../../layouts/AppFooter";
+import { useCart } from "../../contexts/CartContext";
 
 export const ProductDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { addToCart } = useCart();
 //   const [recommended, setRecommended] = useState<Product[]>([]);
 
   useEffect(() => {
@@ -113,14 +115,19 @@ return (
 
                 {/* ADD TO CART BUTTON */}
                 <button
-                    className="
+                  className="
                     w-full bg-black text-white py-4 rounded-md
                     text-sm tracking-wider uppercase font-medium
                     hover:bg-gray-800 transition cursor-pointer
-                    "
-                    onClick={() => alert("Added to cart!")}
+                  "
+                  onClick={() => {
+                    if (product) {
+                      addToCart(product.id, 1);
+                      alert("Added to cart!");
+                    }
+                  }}
                 >
-                    Add to cart
+                  Add to cart
                 </button>
 
                 {/* SHIPPING TEXT */}

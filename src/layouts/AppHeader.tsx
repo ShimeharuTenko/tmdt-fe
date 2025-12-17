@@ -23,7 +23,10 @@ export const Header: React.FC = () => {
 
       <div className="nav-icons">
         {/* <img src={searchImg} alt="search" /> */}
-        <img src={cartImg} alt="cart" />
+        <Link to="/cart">
+          <img src={cartImg} alt="cart" className="cursor-pointer" />
+        </Link>
+        
         <Link to="/register">
         <img
             src={userImg}
